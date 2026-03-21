@@ -15,12 +15,14 @@ router.put("/update-location", authMiddleware, updateLocation);
 
 /* GET ALL TOURISTS */
 
-router.get("/all", async (req,res)=>{
-
-const tourists = await Tourist.find();
-
-res.json(tourists);
-
+router.get("/all", async (req, res) => {
+    try {
+        const tourists = await Tourist.find();
+        res.json(tourists);
+    } catch (error) {
+        console.error("ERROR FETCHING TOURISTS:", error);
+        res.status(500).json({ error: error.message });
+    }
 });
 
 /* SOS ALERT */
