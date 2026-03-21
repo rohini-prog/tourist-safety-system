@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>System Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+rel="stylesheet">
+
+<style>
+
+.login-container{
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+margin-top:100px;
+}
+
+.login-box{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:15px;
+width:300px;
+text-align:center;
+color:white;
+}
+
+.login-box h2{
+margin-bottom:20px;
+}
+
+.input-box{
+display:flex;
+align-items:center;
+background:white;
+padding:10px;
+border-radius:8px;
+margin-bottom:15px;
+}
+
+.input-box i{
+margin-right:10px;
+color:#333;
+}
+
+.input-box input{
+border:none;
+outline:none;
+width:100%;
+}
+
+</style>
+
+</head>
+
+<body class="bg">
+
+<div class="login-container">
+
+<!-- TOURIST LOGIN -->
+
+<div class="login-box">
+
+<h2>
+<i class="fa-solid fa-user"></i>
+Tourist Login
+</h2>
+
+<div class="input-box">
+<i class="fa-solid fa-envelope"></i>
+<input id="email" placeholder="Email">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-lock"></i>
+<input id="password" type="password" placeholder="Password">
+</div>
+
+<button onclick="login()" class="btn-main">
+Login
+</button>
+
+<p>
+New Tourist? <a href="register.html">Register</a>
+</p>
+
+</div>
+
+
+<!-- ADMIN LOGIN -->
+
+<div class="login-box">
+
+<h2>
+<i class="fa-solid fa-user-shield"></i>
+Admin Login
+</h2>
+
+<div class="input-box">
+<i class="fa-solid fa-envelope"></i>
+<input id="adminEmail" placeholder="Admin Email">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-lock"></i>
+<input id="adminPassword" type="password" placeholder="Password">
+</div>
+
+<button onclick="adminLogin()" class="btn-main">
+Login
+</button>
+
+</div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
