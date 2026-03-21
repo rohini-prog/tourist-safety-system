@@ -1,4 +1,4 @@
-const API="http://localhost:5000/api/tourist";
+const API="https://tourist-safety-system-27zy.onrender.com/api/tourist";
 
 /* REGISTER */
 
@@ -11,7 +11,7 @@ const passport=document.getElementById("passport").value;
 const mobile=document.getElementById("mobile").value;
 const emergencyContact=document.getElementById("emergencyContact").value;
 
-const res = await fetch("http://localhost:5000/api/tourist/register",{
+const res = await fetch("https://tourist-safety-system-27zy.onrender.com/api/tourist/register",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
@@ -91,7 +91,7 @@ async function triggerSOS(){
 
 const token = localStorage.getItem("token");
 
-await fetch("http://localhost:5000/api/tourist/sos",{
+await fetch("https://tourist-safety-system-27zy.onrender.com/api/tourist/sos",{
 method:"PUT",
 headers:{
 "Authorization":"Bearer "+token
@@ -209,9 +209,7 @@ marker.setLatLng([lat,lng]);
 map.setView([lat,lng],13);
 }
 
-setInterval(()=>{
-    updateLocation();
-},10000);
+setInterval(updateLocation, 10000);
 
 /* GEO-FENCE CHECK */
 checkGeoFence(lat,lng);
