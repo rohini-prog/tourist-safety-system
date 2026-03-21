@@ -17,7 +17,7 @@ router.put("/update-location", authMiddleware, updateLocation);
 
 router.get("/all", async (req, res) => {
     try {
-        const tourists = await Tourist.find();
+        const tourists = await Tourist.find().select("-password");
         res.json(tourists);
     } catch (error) {
         console.error("ERROR FETCHING TOURISTS:", error);
