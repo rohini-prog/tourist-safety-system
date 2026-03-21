@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const touristSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -46,6 +47,9 @@ const touristSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+},
+{
+    collection: "tourists"   // ⭐⭐⭐ ADD THIS LINE
 });
 
 module.exports = mongoose.model("Tourist", touristSchema);
