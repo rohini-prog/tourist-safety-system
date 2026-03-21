@@ -1,0 +1,30 @@
+<!DOCTYPE html><html><head><title>Tourist Registration</title><link rel="stylesheet" href="style.css"><link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+rel="stylesheet"></head><body class="bg"><div class="form-box"><h2>
+<i class="fa-solid fa-earth-asia"></i>
+Tourist Registration
+</h2><div class="input-box">
+<i class="fa-solid fa-user"></i>
+<input id="name" placeholder="Full Name">
+</div><div class="input-box">
+<i class="fa-solid fa-envelope"></i>
+<input id="email" placeholder="Email">
+</div><div class="input-box">
+<i class="fa-solid fa-lock"></i>
+<input id="password" type="password" placeholder="Password">
+</div><div class="input-box">
+<i class="fa-solid fa-passport"></i>
+<input id="passport" placeholder="Passport Number">
+</div><div class="input-box">
+<i class="fa-solid fa-phone"></i>
+<input id="mobile" placeholder="Mobile Number">
+</div><div class="input-box">
+<i class="fa-solid fa-user-shield"></i>
+<input id="emergencyContact" placeholder="Emergency Contact">
+</div><button onclick="register()" class="btn-main">
+<i class="fa-solid fa-user-check"></i> Register
+</button><p style="margin-top:20px;">
+Already have an account?
+<a href="login.html">Login</a>
+</p><!-- Digital ID Card --><div id="idCard" style="display:none;margin-top:20px;background:white;color:black;padding:15px;border-radius:10px;"><h3>Tourist Digital ID</h3><p><b>Name:</b> <span id="cardName"></span></p><p><b>Passport:</b> <span id="cardPassport"></span></p><p><b>Digital ID:</b> <span id="cardDigital"></span></p></div></div><script src="app.js"></script></body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Tourist Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+</head>
+
+<body class="dash-bg">
+
+<header class="topbar">
+
+<h2>
+<i class="fa-solid fa-map-location-dot"></i>
+Smart Tourist Dashboard
+</h2>
+
+</header>
+<div class="map-section">
+
+<h3><i class="fa-solid fa-map-location-dot"></i> Tourist Location Map</h3>
+
+<div id="map"></div>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<i class="fa-solid fa-id-card"></i>
+<h3>Digital Tourist ID</h3>
+<p>Verified</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-shield-heart"></i>
+<h3>Safety Status</h3>
+<p>Safe</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-compass"></i>
+<h3>Location Tracking</h3>
+<p>Active</p>
+</div>
+
+</div>
+
+<div class="actions">
+
+<button onclick="updateLocation()" class="btn-location">
+<i class="fa-solid fa-location-dot"></i>
+Update Location
+</button>
+
+<button onclick="triggerSOS()" class="btn-sos">
+<i class="fa-solid fa-triangle-exclamation"></i>
+SOS Emergency
+</button>
+
+</div>
+
+<script src="app.js"></script>
+<script>
+loadMap();
+
+setInterval(()=>{
+updateLocation();
+}, 60000); // Update location every minute
+</script>
+
+</body>
+</html>

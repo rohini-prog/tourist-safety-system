@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Tourist Safety Control Room</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+</head>
+
+<body class="admin-body">
+
+<!-- HEADER -->
+
+<div class="admin-header">
+
+<h1>
+<i class="fa-solid fa-shield-halved"></i>
+Tourist Safety Control Room
+</h1>
+
+<button onclick="location.reload()" class="refresh-btn">
+<i class="fa-solid fa-rotate"></i> Refresh
+</button>
+
+</div>
+
+<!-- STATS -->
+
+<div class="stats-container">
+
+<div class="stat-card">
+<i class="fa-solid fa-users"></i>
+<h3>Total Tourists</h3>
+<p id="totalTourists">0</p>
+</div>
+
+<div class="stat-card">
+<i class="fa-solid fa-location-dot"></i>
+<h3>Active Tourists</h3>
+<p id="activeTourists">0</p>
+</div>
+
+<div class="stat-card">
+<i class="fa-solid fa-shield"></i>
+<h3>Safe Tourists</h3>
+<p id="safeCount">0</p>
+</div>
+
+<div class="stat-card alert">
+<i class="fa-solid fa-triangle-exclamation"></i>
+<h3>SOS Alerts</h3>
+<p id="sosCount">0</p>
+</div>
+
+</div>
+
+<!-- MAP -->
+
+<div class="map-wrapper">
+
+<h2>Live Tourist Tracking Map</h2>
+
+<div id="adminMap"></div>
+
+</div>
+
+<!-- TOURIST TABLE -->
+
+<div class="table-wrapper">
+
+<h2>Tourist Monitoring</h2>
+
+<table id="touristTable">
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Passport</th>
+<th>Status</th>
+<th>Location</th>
+</tr>
+</thead>
+
+<tbody></tbody>
+
+</table>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>
