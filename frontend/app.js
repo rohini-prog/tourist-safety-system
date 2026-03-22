@@ -46,12 +46,7 @@ alert(data.message);
 }
 
 }
-/* LOGIN */
 
-async function login(){
-
-const email=document.getElementById("email").value;
-const password=document.getElementById("password").value;
 
 async function login(){
 
@@ -100,7 +95,17 @@ alert("Something went wrong");
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
 function adminLogin(){
 
 const email = document.getElementById("adminEmail").value;
