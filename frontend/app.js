@@ -62,7 +62,7 @@ body:JSON.stringify({email,password})
 const data=await res.json();
 
 localStorage.setItem("token",data.token);
-
+console.log(data.token)
 window.location.href="dashboard.html";
 
 }
