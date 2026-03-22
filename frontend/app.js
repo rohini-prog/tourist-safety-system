@@ -53,19 +53,54 @@ async function login(){
 const email=document.getElementById("email").value;
 const password=document.getElementById("password").value;
 
-const res=await fetch("https://tourist-safety-system-27zy.onrender.com/api/tourist/login",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({email,password})
+async function login(){
+
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+
+try {
+
+const res = await fetch(API + "/login", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ email, password })
 });
 
-const data=await res.json();
-console.log(res)
-localStorage.setItem("token",data.token);
-console.log(data.token)
-window.location.href="dashboard.html";
+console.log("Response:", res);
+
+const data = await res.json();
+console.log("Data:", data);
+
+// ✅ Check success
+if (data.token) {
+
+localStorage.setItem("token", data.token);
+console.log("Token saved:", data.token);
+
+// redirect after success
+window.location.href = "dashboard.html";
+
+} else {
+
+alert(data.message || "Login failed");
 
 }
+
+} catch (error) {
+
+console.error("Login error:", error);
+alert("Something went wrong");
+
+}
+
+}
+
+
+
+
+
+
+    
 function adminLogin(){
 
 const email = document.getElementById("adminEmail").value;
