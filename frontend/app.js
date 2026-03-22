@@ -1,4 +1,4 @@
-const API="http://localhost:5000/api/tourist";
+const API   =  "https://tourist-safety-system-27zy.onrender.com/api/tourist";
 
 /* REGISTER */
 
