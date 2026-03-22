@@ -91,12 +91,14 @@ async function triggerSOS(){
 
 const token = localStorage.getItem("token");
 
-await fetch("https://tourist-safety-system-27zy.onrender.com/api/tourist/sos",{
+const res = await fetch("https://tourist-safety-system-27zy.onrender.com/api/tourist/sos",{
 method:"PUT",
 headers:{
 "Authorization":"Bearer "+token
 }
 });
+
+console.log(res)
 
 alert("🚨 Emergency Alert Sent!");
 
