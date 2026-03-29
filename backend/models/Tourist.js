@@ -62,7 +62,7 @@ const touristSchema = new mongoose.Schema({
     isSafeConfirmed: {
         type: Boolean,
         default: false
-    }
+    },
     isEmergency: {
         type: Boolean,
         default: false
