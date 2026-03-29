@@ -38,6 +38,35 @@ await tourist.save();
 res.json({message:"SOS Alert Sent 🚨"});
 
 });
+/* RESOLVE EMERGENCY + ADMIN RESPONSE */
+router.put("/resolve/:id", async (req, res) => {
+  try {
+    const tourist = await Tourist.findById(req.params.id);
 
+    if (!tourist) {
+      return res.status(404).json({ message: "Tourist not found" });
+    }
+
+    // 🧑‍✈️ Admin message
+    const { response } = req.body;
+
+    tourist.adminResponse = response || "Issue resolved";
+
+    // ✅ Update status
+    tourist.isEmergency = false;
+    tourist.riskStatus = "Safe";
+    tourist.safetyScore = 100;
+
+    await tourist.save();
+
+    res.json({
+      message: "Tourist marked safe ✅",
+      adminResponse: tourist.adminResponse
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 module.exports = router;
