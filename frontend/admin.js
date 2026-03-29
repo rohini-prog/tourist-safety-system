@@ -1,5 +1,35 @@
 const API = "https://tourist-safety-system-27zy.onrender.com/api/tourist";
-
+const translations = {
+  en: {
+    title: "Live Tourist Tracking Map",
+    total: "Total Tourists",
+    active: "Active Tourists",
+    safe: "Safe Tourists",
+    sos: "SOS Alerts"
+  },
+  hi: {
+    title: "पर्यटक ट्रैकिंग मानचित्र",
+    total: "कुल पर्यटक",
+    active: "सक्रिय पर्यटक",
+    safe: "सुरक्षित पर्यटक",
+    sos: "आपातकालीन अलर्ट"
+  },
+  te: {
+    title: "పర్యాటక ట్రాకింగ్ మ్యాప్",
+    total: "మొత్తం పర్యాటకులు",
+    active: "సక్రియ పర్యాటకులు",
+    safe: "సురక్షిత పర్యాటకులు",
+    sos: "అత్యవసర హెచ్చరికలు"
+  }
+};
+function changeLanguage(lang) {
+  document.getElementById("title").innerText = translations[lang].title;
+  document.getElementById("totalTouristsLabel").innerText = translations[lang].total;
+  document.getElementById("activeTouristsLabel").innerText = translations[lang].active;
+  document.getElementById("safeTouristsLabel").innerText = translations[lang].safe;
+  document.getElementById("sosAlertsLabel").innerText = translations[lang].sos;
+}
+console.log(translations.hi.title);
 let map;
 let markers = [];
 let emergencyAlertShown = false;
@@ -158,6 +188,9 @@ async function resolveUser(id) {
     console.error(error);
   }
 }
+document.getElementById("languageSelect").addEventListener("change", function () {
+  changeLanguage(this.value);
+});
 // AUTO REFRESH EVERY 5 SECONDS
 setInterval(()=>{
   if(!isTyping){
