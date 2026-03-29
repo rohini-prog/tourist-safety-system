@@ -122,20 +122,34 @@ if (tourist.location) {
 const prevLat = tourist.location.latitude;
 const prevLng = tourist.location.longitude;
 
-const movementDistance =
-Math.sqrt(
+// distance
+const distance = Math.sqrt(
 Math.pow(latitude - prevLat, 2) +
 Math.pow(longitude - prevLng, 2)
 );
 
-// tourist not moving
-if (movementDistance < 0.00005) {
-riskStatus = "Warning";
+// time difference (seconds)
+const timeDiff = (Date.now() - tourist.updatedAt) / 1000;
+
+// speed
+const speed = distance / timeDiff;
+
+console.log("Distance:", distance);
+console.log("Speed:", speed);
+
+// 🚨 ANOMALY 1: No movement
+if (distance < 0.00005) {
+    riskStatus = "Warning";
 }
 
-// abnormal movement
-if (movementDistance > 0.05) {
-riskStatus = "Danger";
+// 🚨 ANOMALY 2: Sudden jump
+if (distance > 0.05) {
+    riskStatus = "Danger";
+}
+
+// 🚨 ANOMALY 3: High speed
+if (speed > 0.01) {
+    riskStatus = "Danger";
 }
 
 }
@@ -170,6 +184,7 @@ riskStatus = "Danger";
 // -------- SAVE LOCATION --------
 
 tourist.location = { latitude, longitude };
+tourist.updatedAt = Date.now();
 tourist.riskStatus = riskStatus;
 
 await tourist.save();
