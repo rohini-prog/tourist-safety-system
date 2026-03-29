@@ -43,6 +43,10 @@ const touristSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    updatedAt:{
+        type: Date,
+        default:Date.now
+    },
     isEmergency: {
         type: Boolean,
         default: false
