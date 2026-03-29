@@ -189,6 +189,7 @@ async function resolveUser(id) {
   }
 }
 document.getElementById("languageSelect").addEventListener("change", function () {
+  console.log("Selected language:", this.value); // ✅ ADD THIS LINE
   changeLanguage(this.value);
 });
 // AUTO REFRESH EVERY 5 SECONDS
