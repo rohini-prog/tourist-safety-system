@@ -1,4 +1,26 @@
 const API="https://tourist-safety-system-27zy.onrender.com/api/tourist";
+const savedLang = localStorage.getItem("lang") || "en";
+changeLanguage(savedLang);
+const translations = {
+  en: {
+    loginTitle: "Login",
+    loginBtn: "Login"
+  },
+  hi: {
+    loginTitle: "लॉगिन",
+    loginBtn: "लॉगिन करें"
+  },
+  te: {
+    loginTitle: "లాగిన్",
+    loginBtn: "లాగిన్ చేయండి"
+  }
+};
+function changeLanguage(lang) {
+  document.getElementById("loginTitle").innerText = translations[lang].loginTitle;
+  document.getElementById("loginBtn").innerText = translations[lang].loginBtn;
+}
+const savedLang = localStorage.getItem("lang") || "en";
+changeLanguage(savedLang);
 
 /* REGISTER */
 
