@@ -39,6 +39,10 @@ const touristSchema = new mongoose.Schema({
         type: String,
         default: "Safe"
     },
+    safetyScore: {
+    type: Number,
+    default: 100
+},
     createdAt: {
         type: Date,
         default: Date.now
