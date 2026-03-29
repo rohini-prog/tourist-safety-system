@@ -186,7 +186,7 @@ if (riskStatus === "Warning") safetyScore = 70;
 if (riskStatus === "Danger") safetyScore = 40;
 
 tourist.safetyScore = safetyScore;
-tourist.riskstatus  = riskStatus;
+tourist.riskStatus  = riskStatus;
 
 
 // -------- SAVE LOCATION --------
