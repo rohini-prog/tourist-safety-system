@@ -199,7 +199,8 @@ await tourist.save();
 
 res.json({
 message: "Location updated successfully",
-riskStatus: tourist.riskStatus
+riskStatus: tourist.riskStatus,
+SafetyScore: tourist.safetyScore
 });
 
 } catch (error) {
