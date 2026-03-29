@@ -204,7 +204,7 @@ maxZoom: 19
 marker = L.marker([lat, lng]).addTo(map)
 .bindPopup("Tourist Current Location")
 .openPopup();
-
+console.log("Map loaded");
 // Danger Zone
 L.circle([17.3950, 78.4950], {
 color: 'red',
