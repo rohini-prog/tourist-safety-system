@@ -1,5 +1,45 @@
 const API = "https://tourist-safety-system-27zy.onrender.com/api/tourist";
 
+/* ================= LOGIN ================= */
+
+async function login() {
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+
+    const res = await fetch(API + "/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    console.log(data); // debug
+
+    if (res.ok) {
+      alert("Login Successful ✅");
+
+      // save token
+      localStorage.setItem("token", data.token);
+
+      // 🔥 REDIRECT
+      window.location.href = "dashboard.html";
+
+    } else {
+      alert(data.message);
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert("Login failed ❌");
+  }
+}
+
 /* ================= MULTILINGUAL ================= */
 
 const translations = {
