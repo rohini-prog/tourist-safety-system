@@ -180,7 +180,7 @@ riskStatus = "Danger";
 }
 
 });
-    let safetyScore = 100;
+let safetyScore = 100;
 
 if (riskStatus === "Warning") safetyScore = 70;
 if (riskStatus === "Danger") safetyScore = 40;
@@ -199,7 +199,7 @@ await tourist.save();
 res.json({
 message: "Location updated successfully",
 riskStatus: tourist.riskStatus,
-safetyScore: tourist.safetyScore
+safetyScore: tourist.safetyScore,
 });
 
 } catch (error) {
