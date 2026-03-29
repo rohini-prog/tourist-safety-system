@@ -78,11 +78,20 @@ Status: ${t.isEmergency ? "🚨 Emergency" : t.riskStatus}<br>
 
 ${
   t.isEmergency
-    ? `<button onclick="resolveUser('${t._id}')">Resolve</button>`
-    : "Safe"
+    ? `
+      <input 
+        id="msg-${t._id}" 
+        placeholder="Enter response" 
+        style="width:120px; margin-top:5px;"
+      /><br>
+
+      <button onclick="resolveUser('${t._id}')">
+        Resolve
+      </button>
+    `
+    : `Response: ${t.adminResponse || "None"}`
 }
 `);
-
 markers.push(marker);
 
 }
@@ -116,21 +125,34 @@ document.getElementById("sosCount").innerText = sos;
 
 loadAdminData();
 
-loadAdminData();
 async function resolveUser(id) {
   try {
+
+    const responseText = document.getElementById(`msg-${id}`).value;
+
+    if (!responseText) {
+      alert("Please enter response");
+      return;
+    }
+
     const res = await fetch(`${API}/resolve/${id}`, {
-      method: "PUT"
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        response: responseText
+      })
     });
 
     const data = await res.json();
 
     alert("✅ Tourist marked safe");
 
-    loadAdminData(); // refresh map
+    loadAdminData(); // refresh
 
   } catch (error) {
-    console.error("Error resolving tourist:", error);
+    console.error(error);
   }
 }
 // AUTO REFRESH EVERY 5 SECONDS
