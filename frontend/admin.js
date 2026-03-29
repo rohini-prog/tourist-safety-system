@@ -3,6 +3,7 @@ const API = "https://tourist-safety-system-27zy.onrender.com/api/tourist";
 let map;
 let markers = [];
 let emergencyAlertShown = false;
+let isTyping = false;
 
 // LOAD MAP
 function loadAdminMap(){
@@ -80,10 +81,12 @@ ${
   t.isEmergency
     ? `
       <input 
-        id="msg-${t._id}" 
-        placeholder="Enter response" 
-        style="width:120px; margin-top:5px;"
-      /><br>
+  id="msg-${t._id}" 
+  placeholder="Enter response" 
+  style="width:120px; margin-top:5px;"
+  onfocus="isTyping = true"
+  onblur="isTyping = false"
+/><br>
 
       <button onclick="resolveUser('${t._id}')">
         Resolve
@@ -157,5 +160,7 @@ async function resolveUser(id) {
 }
 // AUTO REFRESH EVERY 5 SECONDS
 setInterval(()=>{
-loadAdminData();
+  if(!isTyping){
+    loadAdminData();
+  }
 },5000);
