@@ -22,6 +22,8 @@ const translations = {
     sos: "అత్యవసర హెచ్చరికలు"
   }
 };
+const savedLang = localStorage.getItem("lang") || "en";
+changeLanguage(savedLang);
 function changeLanguage(lang) {
   document.getElementById("title").innerText = translations[lang].title;
   document.getElementById("totalTouristsLabel").innerText = translations[lang].total;
@@ -189,8 +191,11 @@ async function resolveUser(id) {
   }
 }
 document.getElementById("languageSelect").addEventListener("change", function () {
-  console.log("Selected language:", this.value); // ✅ ADD THIS LINE
-  changeLanguage(this.value);
+  const lang = this.value;
+
+  localStorage.setItem("lang", lang); // ⭐ SAVE LANGUAGE
+
+  changeLanguage(lang);
 });
 // AUTO REFRESH EVERY 5 SECONDS
 setInterval(()=>{
