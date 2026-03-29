@@ -193,14 +193,13 @@ tourist.riskstatus  = riskStatus;
 
 tourist.location = { latitude, longitude };
 tourist.updatedAt = Date.now();
-tourist.riskStatus = riskStatus;
 
 await tourist.save();
 
 res.json({
 message: "Location updated successfully",
 riskStatus: tourist.riskStatus,
-SafetyScore: tourist.safetyScore
+safetyScore: tourist.safetyScore
 });
 
 } catch (error) {
