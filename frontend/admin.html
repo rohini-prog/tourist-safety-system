@@ -13,6 +13,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <link rel="stylesheet"
 href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
+  <select id="languageSelect">
+  <option value="en">English</option>
+  <option value="hi">Hindi</option>
+  <option value="te">Telugu</option>
+</select>
+
 </head>
 
 <body class="admin-body">
@@ -38,25 +44,25 @@ Tourist Safety Control Room
 
 <div class="stat-card">
 <i class="fa-solid fa-users"></i>
-<h3>Total Tourists</h3>
+<h3 id="totalTouristsLabel">Total Tourists</h3>
 <p id="totalTourists">0</p>
 </div>
 
 <div class="stat-card">
 <i class="fa-solid fa-location-dot"></i>
-<h3>Active Tourists</h3>
+<h3 id="activeTouristsLabel">Active Tourists</h3>
 <p id="activeTourists">0</p>
 </div>
 
 <div class="stat-card">
 <i class="fa-solid fa-shield"></i>
-<h3>Safe Tourists</h3>
+<h3 id="safeTouristsLabel">Safe Tourists</h3>
 <p id="safeCount">0</p>
 </div>
 
 <div class="stat-card alert">
 <i class="fa-solid fa-triangle-exclamation"></i>
-<h3>SOS Alerts</h3>
+<h3 id="sosAlertsLabel">SOS Alerts</h3>
 <p id="sosCount">0</p>
 </div>
 
