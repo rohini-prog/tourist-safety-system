@@ -74,7 +74,13 @@ t.location.longitude
 
 marker.bindPopup(`
 <b>${t.name}</b><br>
-Status: ${t.isEmergency ? "🚨 Emergency" : t.riskStatus}
+Status: ${t.isEmergency ? "🚨 Emergency" : t.riskStatus}<br>
+
+${
+  t.isEmergency
+    ? `<button onclick="resolveUser('${t._id}')">Resolve</button>`
+    : "Safe"
+}
 `);
 
 markers.push(marker);
@@ -110,7 +116,23 @@ document.getElementById("sosCount").innerText = sos;
 
 loadAdminData();
 
+loadAdminData();
+async function resolveUser(id) {
+  try {
+    const res = await fetch(`${API}/resolve/${id}`, {
+      method: "PUT"
+    });
 
+    const data = await res.json();
+
+    alert("✅ Tourist marked safe");
+
+    loadAdminData(); // refresh map
+
+  } catch (error) {
+    console.error("Error resolving tourist:", error);
+  }
+}
 // AUTO REFRESH EVERY 5 SECONDS
 setInterval(()=>{
 loadAdminData();
