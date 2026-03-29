@@ -1,21 +1,21 @@
 const API = "https://tourist-safety-system-27zy.onrender.com/api/tourist";
 const translations = {
   en: {
-    title: "Live Tourist Tracking Map",
+    title: "Tourist Safety Control",
     total: "Total Tourists",
     active: "Active Tourists",
     safe: "Safe Tourists",
     sos: "SOS Alerts"
   },
   hi: {
-    title: "पर्यटक ट्रैकिंग मानचित्र",
+    title: "पर्यटक सुरक्षा नियंत्रण",
     total: "कुल पर्यटक",
     active: "सक्रिय पर्यटक",
     safe: "सुरक्षित पर्यटक",
     sos: "आपातकालीन अलर्ट"
   },
   te: {
-    title: "పర్యాటక ట్రాకింగ్ మ్యాప్",
+    title: "పర్యాటక భద్రత నియంత్రణ",
     total: "మొత్తం పర్యాటకులు",
     active: "సక్రియ పర్యాటకులు",
     safe: "సురక్షిత పర్యాటకులు",
