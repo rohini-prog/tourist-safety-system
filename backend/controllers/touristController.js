@@ -111,6 +111,7 @@ const tourist = await Tourist.findById(req.user.id);
 if (!tourist) {
 return res.status(404).json({ message: "Tourist not found" });
 }
+    
 
 
 // -------- AI MOVEMENT ANALYSIS --------
@@ -179,6 +180,13 @@ riskStatus = "Danger";
 }
 
 });
+    let safetyScore = 100;
+
+if (riskStatus === "Warning") safetyScore = 70;
+if (riskStatus === "Danger") safetyScore = 40;
+
+tourist.safetyScore = safetyScore;
+tourist.riskstatus  = riskStatus;
 
 
 // -------- SAVE LOCATION --------
