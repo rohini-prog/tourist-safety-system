@@ -47,6 +47,18 @@ const touristSchema = new mongoose.Schema({
         type: Date,
         default:Date.now
     },
+    isInactive: {
+        type: Boolean,
+        default: false
+    },
+    lastMovementTime: {
+        type: Date,
+        default: Date.now
+    },
+    isSafeConfirmed: {
+        type: Boolean,
+        default: false
+    }
     isEmergency: {
         type: Boolean,
         default: false
