@@ -210,7 +210,26 @@ res.status(500).json({ error: error.message });
 
 };
 
+exports.getProfile = async (req, res) => {
+  try {
 
+    const tourist = await Tourist.findById(req.user.id);
+
+    if (!tourist) {
+      return res.status(404).json({ message: "Tourist not found" });
+    }
+
+    res.json({
+      name: tourist.name,
+      riskStatus: tourist.riskStatus,
+      safetyScore: tourist.safetyScore,
+      response: tourist.response   // 👈 VERY IMPORTANT
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 // ================= SOS EMERGENCY =================
 exports.triggerSOS = async (req, res) => {
