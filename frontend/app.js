@@ -196,6 +196,23 @@ async function triggerSOS() {
   alert("🚨 Emergency Alert Sent!");
 }
 
+/* ================= GET RESPONSE ================= */
+
+async function getTouristData() {
+  const token = localStorage.getItem("token");
+
+  const res = await fetch(API + "/profile", {
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  });
+
+  const data = await res.json();
+
+  document.getElementById("adminResponse").innerText =
+    "Response: " + (data.response || "Waiting...");
+}
+
 /* ================= INIT ================= */
 
 document.addEventListener("DOMContentLoaded", () => {
