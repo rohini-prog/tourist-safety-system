@@ -75,8 +75,14 @@ SOS Emergency
 </div>
 
 <script src="./app.js"></script>
+<script>
+  loadMap();
 
-
-
+  getTouristData();
+  setInterval(()=>{
+    updateLocation();
+    getTouristData();
+  },60000);
+</script>
 </body>
 </html>
