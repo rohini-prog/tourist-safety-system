@@ -12,6 +12,7 @@ router.post("/register", registerTourist);
 router.post("/login", loginTourist);
 
 router.put("/update-location", authMiddleware, updateLocation);
+router.get("/profile",authMiddleware,getProfile);
 
 /* GET ALL TOURISTS */
 
