@@ -148,11 +148,10 @@ text-align:center;
 }
 
 #map{
-height:400px;
-width:80%;
-margin:auto;
-border-radius:15px;
-border:3px solid white;
+  height:250px;     /* 🔽 reduce height */
+  width:60%;        /* 🔽 reduce width */
+  margin:auto;
+  border-radius:10px;  /* optional */
 }
 .admin-cards{
 display:flex;
