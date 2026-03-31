@@ -85,13 +85,13 @@ font-size:22px;
 display:flex;
 justify-content:center;
 gap:30px;
-margin-top:30px;
-flex-wrap:wrap;
+margin-top:20px;
+flex-wrap:nowrap;
 }
 
 .card{
 background:rgba(255,255,255,0.2);
-padding:25px;
+padding:15px;
 border-radius:15px;
 width:220px;
 backdrop-filter:blur(10px);
@@ -149,8 +149,8 @@ text-align:center;
 
 #map{
   height:250px;     /* 🔽 reduce height */
-  width:60%;        /* 🔽 reduce width */
-  margin:auto;
+  width:90%;        /* 🔽 reduce width */
+  margin:10px auto;
   border-radius:10px;  /* optional */
 }
 .admin-cards{
