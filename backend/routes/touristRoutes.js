@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Tourist = require("../models/Tourist");   // ⭐ ADD THIS
 
-const { registerTourist, loginTourist, updateLocation } =
+const { registerTourist, loginTourist, updateLocation,triggerSOS, getProfile } =
 require("../controllers/touristController");
 
 const authMiddleware = require("../middleware/authMiddleware");
