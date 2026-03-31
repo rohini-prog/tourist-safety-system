@@ -17,72 +17,69 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <body class="dash-bg">
 
 <header class="topbar">
-
-<h2 id="dashboardTitle">
-<i class="fa-solid fa-map-location-dot"></i>
-Smart Tourist Dashboard
-</h2>
-
+  <h2 id="dashboardTitle">
+    <i class="fa-solid fa-map-location-dot"></i>
+    Smart Tourist Dashboard
+  </h2>
 </header>
 
-<div class="map-section">
+<div class="dashboard-container">
 
-<h3 id="mapTitle">
-<i class="fa-solid fa-map-location-dot"></i>
-Tourist Location Map
-</h3>
+  <!-- MAP -->
+  <div class="map-box">
+    <h3 id="mapTitle">Tourist Location Map</h3>
+    <div id="map"></div>
+  </div>
 
-<div id="map"></div>
+  <!-- CARDS -->
+  <div class="cards-row">
 
-</div>
+    <div class="card">
+      <i class="fa-solid fa-id-card"></i>
+      <h3 id="digitalIdLabel">Digital Tourist ID</h3>
+      <p id="digitalStatus">Verified</p>
+    </div>
 
-<div class="cards">
+    <div class="card">
+      <i class="fa-solid fa-shield-heart"></i>
+      <h3 id="safetyLabel">Safety Status</h3>
+      <p id="safetyStatus">Safe</p>
+      <p id="adminResponse">Response: waiting...</p>
+    </div>
 
-<div class="card">
-<i class="fa-solid fa-id-card"></i>
-<h3 id="digitalIdLabel">Digital Tourist ID</h3>
-<p id="digitalStatus">Verified</p>
-</div>
+    <div class="card">
+      <i class="fa-solid fa-compass"></i>
+      <h3 id="trackingLabel">Location Tracking</h3>
+      <p id="trackingStatus">Active</p>
+    </div>
 
-<div class="card">
-<i class="fa-solid fa-shield-heart"></i>
-<h3 id="safetyLabel">Safety Status</h3>
-<p id="safetyStatus">Safe</p>
+  </div>
 
-<p id="adminResponse">Response: waiting...</p>
-</div>
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button onclick="updateLocation()" class="btn-location" id="updateBtn">
+      <i class="fa-solid fa-location-dot"></i> Update Location
+    </button>
 
-<div class="card">
-<i class="fa-solid fa-compass"></i>
-<h3 id="trackingLabel">Location Tracking</h3>
-<p id="trackingStatus">Active</p>
-</div>
-
-</div>
-
-<div class="actions">
-
-<button onclick="updateLocation()" class="btn-location" id="updateBtn">
-<i class="fa-solid fa-location-dot"></i>
-Update Location
-</button>
-
-<button onclick="triggerSOS()" class="btn-sos" id="sosBtn">
-<i class="fa-solid fa-triangle-exclamation"></i>
-SOS Emergency
-</button>
+    <button onclick="triggerSOS()" class="btn-sos" id="sosBtn">
+      <i class="fa-solid fa-triangle-exclamation"></i> SOS Emergency
+    </button>
+  </div>
 
 </div>
 
 <script src="./app.js"></script>
+
 <script>
   loadMap();
 
   getTouristData();
+
   setInterval(()=>{
     updateLocation();
     getTouristData();
   },60000);
 </script>
+
 </body>
 </html>
