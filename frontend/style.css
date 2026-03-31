@@ -90,13 +90,14 @@ gap:20px;
 margin-top:20px;
 width:100%;
 flex-wrap:nowrap;
+border:2px solid red;
 }
 
 .card{
 background:rgba(255,255,255,0.2);
 padding:15px;
 border-radius:15px;
-width:220px;
+width:160px;
 backdrop-filter:blur(10px);
 transition:0.3s;
 }
