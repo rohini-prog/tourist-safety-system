@@ -522,23 +522,7 @@ border-radius:15px;
   font-size:14px;
 }
 
-/* BUTTONS */
-.actions{
-  margin-top:10px;
-}
 
-button{
-  padding:8px 15px;
-  margin:5px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-.btn-location{
-  background:#007bff;
-  color:white;
-}
 
 .btn-sos{
   background:red;
