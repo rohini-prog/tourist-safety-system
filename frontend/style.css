@@ -485,46 +485,4 @@ width:90%;
 margin:auto;
 border-radius:15px;
 }
-/* CONTAINER */
-.dashboard-container{
-  text-align:center;
-  padding:10px;
-}
 
-/* MAP */
-.map-box{
-  margin-bottom:10px;
-}
-
-#map{
-  height:220px;   /* 🔥 reduced */
-  width:85%;
-  margin:auto;
-  border-radius:12px;
-}
-
-/* CARDS */
-.cards-row{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  margin:10px 0;
-  flex-wrap:wrap;
-}
-
-.card{
-  width:180px;
-  padding:12px;
-  border-radius:12px;
-  background:rgba(255,255,255,0.2);
-  backdrop-filter:blur(10px);
-  color:white;
-  font-size:14px;
-}
-
-
-
-.btn-sos{
-  background:red;
-  color:white;
-}
