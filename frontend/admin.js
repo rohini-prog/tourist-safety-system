@@ -1,4 +1,7 @@
 const API = "https://tourist-safety-system-27zy.onrender.com/api/tourist";
+
+/* ================= LANGUAGE ================= */
+
 const translations = {
   en: {
     title: "Tourist Safety Control",
@@ -22,8 +25,10 @@ const translations = {
     sos: "అత్యవసర హెచ్చరికలు"
   }
 };
+
 const savedLang = localStorage.getItem("lang") || "en";
 changeLanguage(savedLang);
+
 function changeLanguage(lang) {
   document.getElementById("title").innerText = translations[lang].title;
   document.getElementById("totalTouristsLabel").innerText = translations[lang].total;
@@ -31,186 +36,141 @@ function changeLanguage(lang) {
   document.getElementById("safeTouristsLabel").innerText = translations[lang].safe;
   document.getElementById("sosAlertsLabel").innerText = translations[lang].sos;
 }
-console.log(translations.hi.title);
+
+/* ================= GLOBAL ================= */
+
 let map;
 let markers = [];
 let emergencyAlertShown = false;
 let isTyping = false;
 
-// LOAD MAP
-function loadAdminMap(){
+/* ================= LOAD MAP ================= */
 
-map = L.map('adminMap').setView([17.3850,78.4867],10);
+function loadAdminMap() {
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-maxZoom:19
-}).addTo(map);
+  map = L.map('adminMap').setView([17.3850, 78.4867], 10);
 
-// GEO FENCE DANGER ZONES
-const dangerZones = [
-[17.400,78.500],
-[17.420,78.470],
-[17.360,78.520],
-[17.380,78.450]
-];
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  }).addTo(map);
 
-dangerZones.forEach(zone => {
+  // Danger zones
+  const dangerZones = [
+    [17.400, 78.500],
+    [17.420, 78.470],
+    [17.360, 78.520],
+    [17.380, 78.450]
+  ];
 
-L.circle(zone,{
-color:"red",
-fillColor:"#f03",
-fillOpacity:0.3,
-radius:1000
-}).addTo(map).bindPopup("Restricted Area 🚨");
+  dangerZones.forEach(zone => {
+    L.circle(zone, {
+      color: "red",
+      fillColor: "#f03",
+      fillOpacity: 0.3,
+      radius: 1000
+    }).addTo(map).bindPopup("Restricted Area 🚨");
+  });
 
-});
-
+  // 🔥 IMPORTANT FIX
+  setTimeout(() => {
+    map.invalidateSize();
+  }, 500);
 }
 
 loadAdminMap();
 
+/* ================= LOAD DATA ================= */
 
-// LOAD TOURIST DATA
-async function loadAdminData(){
+async function loadAdminData() {
 
-const res = await fetch(API + "/all");
-const tourists = await res.json();
+  const res = await fetch(API + "/all");
+  const tourists = await res.json();
 
-document.getElementById("totalTourists").innerText = tourists.length;
+  document.getElementById("totalTourists").innerText = tourists.length;
 
-let active = 0;
-let safe = 0;
-let sos = 0;
+  let active = 0;
+  let safe = 0;
+  let sos = 0;
 
-const tableBody = document.querySelector("#touristTable tbody");
-tableBody.innerHTML = "";
+  const tableBody = document.querySelector("#touristTable tbody");
+  tableBody.innerHTML = "";
 
-// CLEAR OLD MARKERS
-markers.forEach(m => map.removeLayer(m));
-markers = [];
+  // Clear markers
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
 
-tourists.forEach(t => {
+  tourists.forEach(t => {
 
-if(t.isEmergency && !emergencyAlertShown){
-alert("🚨 Emergency Tourist Detected!");
-emergencyAlertShown = true;
-}
+    if (t.isEmergency && !emergencyAlertShown) {
+      alert("🚨 Emergency Tourist Detected!");
+      emergencyAlertShown = true;
+    }
 
-if(t.location){
+    if (t.location) {
 
-active++;
+      active++;
 
-const marker = L.marker([
-t.location.latitude,
-t.location.longitude
-]).addTo(map);
+      const marker = L.marker([
+        t.location.latitude,
+        t.location.longitude
+      ]).addTo(map);
 
-marker.bindPopup(`
-<b>${t.name}</b><br>
-Status: ${t.isEmergency ? "🚨 Emergency" : t.riskStatus}<br>
+      const inputId = "msg_" + t._id;
 
-${
-  t.isEmergency
-    ? `
-     const inputId = "msg_" + t._id;
+      marker.bindPopup(`
+        <b>${t.name}</b><br>
+        Status: ${t.isEmergency ? "🚨 Emergency" : t.riskStatus}<br><br>
 
-marker.bindPopup(`
-<b>${t.name}</b><br>
-Status: ${t.isEmergency ? "🚨 Emergency" : t.riskStatus}<br><br>
+        ${
+          t.isEmergency
+            ? `
+              <input 
+                id="${inputId}" 
+                placeholder="Enter response"
+                style="width:120px; margin-top:5px;"
+                onfocus="isTyping = true"
+                onblur="isTyping = false"
+              /><br><br>
 
-${
-  t.isEmergency
-    ? `
-      <input 
-        id="${inputId}" 
-        placeholder="Enter response"
-        style="width:120px; margin-top:5px;"
-        onfocus="isTyping = true"
-        onblur="isTyping = false"
-      /><br><br>
+              <button onclick="sendResponse('${t._id}', '${inputId}')">
+                Send
+              </button>
 
-      <button onclick="sendResponse('${t._id}', '${inputId}')">
-        Send
-      </button>
+              <button onclick="resolveUser('${t._id}')">
+                Resolve
+              </button>
+            `
+            : `Response: ${t.response || "None"}`
+        }
+      `);
 
-      <button onclick="resolveUser('${t._id}')">
-        Resolve
-      </button>
-    `
-    : `Response: ${t.response || "None"}`
-}
-`);
-    
-markers.push(marker);
+      markers.push(marker);
+    }
 
-}
+    if (t.riskStatus === "Safe") safe++;
+    if (t.isEmergency) sos++;
 
-if(t.riskStatus === "Safe"){
-safe++;
-}
+    const row = `
+      <tr>
+        <td>${t.name}</td>
+        <td>${t.passport}</td>
+        <td>${t.isEmergency ? "🚨 Emergency" : t.riskStatus}</td>
+        <td>${t.location ? "Available" : "Unknown"}</td>
+      </tr>
+    `;
 
-if(t.isEmergency){
-sos++;
-}
+    tableBody.innerHTML += row;
+  });
 
-const row = `
-<tr>
-<td>${t.name}</td>
-<td>${t.passport}</td>
-<td>${t.isEmergency ? "🚨 Emergency" : t.riskStatus}</td>
-<td>${t.location ? "Available" : "Unknown"}</td>
-</tr>
-`;
-
-tableBody.innerHTML += row;
-
-});
-
-document.getElementById("activeTourists").innerText = active;
-document.getElementById("safeCount").innerText = safe;
-document.getElementById("sosCount").innerText = sos;
-
+  document.getElementById("activeTourists").innerText = active;
+  document.getElementById("safeCount").innerText = safe;
+  document.getElementById("sosCount").innerText = sos;
 }
 
 loadAdminData();
 
-async function resolveUser(id) {
-  try {
+/* ================= SEND RESPONSE ================= */
 
-    const responseText = document.getElementById(`msg-${id}`).value;
-
-    if (!responseText) {
-      alert("Please enter response");
-      return;
-    }
-
-    const res = await fetch(`${API}/resolve/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        response: responseText
-      })
-    });
-
-    const data = await res.json();
-
-    alert("✅ Tourist marked safe");
-
-    loadAdminData(); // refresh
-
-  } catch (error) {
-    console.error(error);
-  }
-}
-document.getElementById("languageSelect").addEventListener("change", function () {
-  const lang = this.value;
-
-  localStorage.setItem("lang", lang); // ⭐ SAVE LANGUAGE
-
-  changeLanguage(lang);
-});
 async function sendResponse(touristId, inputId) {
 
   const message = document.getElementById(inputId).value;
@@ -230,9 +190,50 @@ async function sendResponse(touristId, inputId) {
 
   alert("Message sent ✅");
 }
-// AUTO REFRESH EVERY 5 SECONDS
-setInterval(()=>{
-  if(!isTyping){
+
+/* ================= RESOLVE ================= */
+
+async function resolveUser(id) {
+  try {
+
+    const responseText = document.getElementById(`msg_${id}`).value;
+
+    if (!responseText) {
+      alert("Please enter response");
+      return;
+    }
+
+    await fetch(`${API}/resolve/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        response: responseText
+      })
+    });
+
+    alert("✅ Tourist marked safe");
+
+    loadAdminData();
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+/* ================= LANGUAGE CHANGE ================= */
+
+document.getElementById("languageSelect").addEventListener("change", function () {
+  const lang = this.value;
+  localStorage.setItem("lang", lang);
+  changeLanguage(lang);
+});
+
+/* ================= AUTO REFRESH ================= */
+
+setInterval(() => {
+  if (!isTyping) {
     loadAdminData();
   }
-},5000);
+}, 5000);
