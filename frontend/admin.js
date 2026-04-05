@@ -112,21 +112,35 @@ Status: ${t.isEmergency ? "🚨 Emergency" : t.riskStatus}<br>
 ${
   t.isEmergency
     ? `
+     const inputId = "msg_" + t._id;
+
+marker.bindPopup(`
+<b>${t.name}</b><br>
+Status: ${t.isEmergency ? "🚨 Emergency" : t.riskStatus}<br><br>
+
+${
+  t.isEmergency
+    ? `
       <input 
-  id="msg-${t._id}" 
-  placeholder="Enter response" 
-  style="width:120px; margin-top:5px;"
-  onfocus="isTyping = true"
-  onblur="isTyping = false"
-/><br>
+        id="${inputId}" 
+        placeholder="Enter response"
+        style="width:120px; margin-top:5px;"
+        onfocus="isTyping = true"
+        onblur="isTyping = false"
+      /><br><br>
+
+      <button onclick="sendResponse('${t._id}', '${inputId}')">
+        Send
+      </button>
 
       <button onclick="resolveUser('${t._id}')">
         Resolve
       </button>
     `
-    : `Response: ${t.adminResponse || "None"}`
+    : `Response: ${t.response || "None"}`
 }
 `);
+    
 markers.push(marker);
 
 }
@@ -197,6 +211,25 @@ document.getElementById("languageSelect").addEventListener("change", function ()
 
   changeLanguage(lang);
 });
+async function sendResponse(touristId, inputId) {
+
+  const message = document.getElementById(inputId).value;
+
+  if (!message) {
+    alert("Enter message first");
+    return;
+  }
+
+  await fetch(API + "/send-response/" + touristId, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message })
+  });
+
+  alert("Message sent ✅");
+}
 // AUTO REFRESH EVERY 5 SECONDS
 setInterval(()=>{
   if(!isTyping){
