@@ -284,3 +284,32 @@ exports.sendResponse = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+// ================= RESOLVE EMERGENCY =================
+exports.resolveEmergency = async (req, res) => {
+  try {
+
+    const tourist = await Tourist.findById(req.user.id);
+
+    if (!tourist) {
+      return res.status(404).json({ message: "Tourist not found" });
+    }
+
+    // ✅ Change status
+    tourist.isEmergency = false;
+    tourist.riskStatus = "Safe";
+    tourist.safetyScore = 100;
+
+    // optional message
+    tourist.response = "Issue resolved ✅";
+
+    await tourist.save();
+
+    res.json({
+      message: "Marked as Safe",
+      riskStatus: tourist.riskStatus
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
