@@ -67,6 +67,10 @@ const touristSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    response: {
+        type: String,
+        default: ""
+    },
 },
 {
     collection: "tourists"   // ⭐⭐⭐ ADD THIS LINE
