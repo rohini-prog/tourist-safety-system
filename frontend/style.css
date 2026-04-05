@@ -497,3 +497,22 @@ border-radius:15px;
   margin-top:20px;
   width:100%;
 }
+.form-box{
+  position: relative;
+  z-index: 10;
+
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(12px);
+  padding:40px;
+  border-radius:15px;
+  text-align:center;
+  width:320px;
+  color:white;
+}
+.bg{
+  position:relative;
+  z-index: 1;
+}
+.form-box, .form-box*{
+  pointer-events: auto;
+}
