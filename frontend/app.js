@@ -1,5 +1,63 @@
 const API = "https://tourist-safety-system-27zy.onrender.com/api/tourist";
 
+/* ================= REGISTER ================= */
+
+async function register() {
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const passport = document.getElementById("passport").value;
+  const mobile = document.getElementById("mobile").value;
+  const emergencyContact = document.getElementById("emergencyContact").value;
+
+  try {
+
+    const res = await fetch(API + "/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        passport,
+        mobile,
+        emergencyContact
+      })
+    });
+
+    const data = await res.json();
+
+    console.log(data);
+
+    if (res.ok) {
+
+      alert("Registration Successful ✅");
+
+      // ✅ SHOW DIGITAL ID CARD
+      document.getElementById("idCard").style.display = "block";
+      document.getElementById("cardName").innerText = name;
+      document.getElementById("cardPassport").innerText = passport;
+      document.getElementById("cardDigital").innerText =
+        data.digitalID || "Generated";
+
+      // ✅ REDIRECT AFTER 2 SECONDS
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2000);
+
+    } else {
+      alert(data.message || "Registration failed ❌");
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert("Server error ❌");
+  }
+}
+
 /* ================= LOGIN ================= */
 
 async function login() {
