@@ -285,3 +285,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+async function markSafe() {
+
+  const token = localStorage.getItem("token");
+
+  await fetch(API + "/resolve", {
+    method: "PUT",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  });
+
+  alert("✅ Issue marked as resolved");
+
+  // refresh UI
+  getTouristData();
+}
