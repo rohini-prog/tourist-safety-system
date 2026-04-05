@@ -259,3 +259,28 @@ res.status(500).json({ error: error.message });
 }
 
 };
+// ================= ADMIN SEND RESPONSE =================
+exports.sendResponse = async (req, res) => {
+  try {
+
+    const { touristId, message } = req.body;
+
+    const tourist = await Tourist.findById(touristId);
+
+    if (!tourist) {
+      return res.status(404).json({ message: "Tourist not found" });
+    }
+
+    // ✅ Save admin message
+    tourist.response = message;
+
+    await tourist.save();
+
+    res.json({
+      message: "Response sent successfully"
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
