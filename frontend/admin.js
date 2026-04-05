@@ -54,7 +54,6 @@ function loadAdminMap() {
     maxZoom: 19
   }).addTo(map);
 
-  // Danger zones
   const dangerZones = [
     [17.400, 78.500],
     [17.420, 78.470],
@@ -71,7 +70,6 @@ function loadAdminMap() {
     }).addTo(map).bindPopup("Restricted Area 🚨");
   });
 
-  // 🔥 IMPORTANT FIX
   setTimeout(() => {
     map.invalidateSize();
   }, 500);
@@ -95,13 +93,13 @@ async function loadAdminData() {
   const tableBody = document.querySelector("#touristTable tbody");
   tableBody.innerHTML = "";
 
-  // Clear markers
+  // clear markers
   markers.forEach(m => map.removeLayer(m));
   markers = [];
 
   tourists.forEach(t => {
 
-    if (t.isEmergency && !emergencyAlertShown) {
+    if (t.riskStatus === "Danger" && !emergencyAlertShown) {
       alert("🚨 Emergency Tourist Detected!");
       emergencyAlertShown = true;
     }
@@ -119,10 +117,10 @@ async function loadAdminData() {
 
       marker.bindPopup(`
         <b>${t.name}</b><br>
-        Status: ${t.isEmergency ? "🚨 Emergency" : t.riskStatus}<br><br>
+        Status: ${t.riskStatus === "Danger" ? "🚨 Emergency" : "Safe"}<br><br>
 
         ${
-          t.isEmergency
+          t.riskStatus === "Danger"
             ? `
               <input 
                 id="${inputId}" 
@@ -148,13 +146,15 @@ async function loadAdminData() {
     }
 
     if (t.riskStatus === "Safe") safe++;
-    if (t.isEmergency) sos++;
+    if (t.riskStatus === "Danger") sos++;
 
     const row = `
       <tr>
         <td>${t.name}</td>
         <td>${t.passport}</td>
-        <td>${t.isEmergency ? "🚨 Emergency" : t.riskStatus}</td>
+        <td style="color:${t.riskStatus === "Danger" ? "red" : "green"}">
+          ${t.riskStatus === "Danger" ? "🚨 Emergency" : "Safe"}
+        </td>
         <td>${t.location ? "Available" : "Unknown"}</td>
       </tr>
     `;
@@ -189,6 +189,8 @@ async function sendResponse(touristId, inputId) {
   });
 
   alert("Message sent ✅");
+
+  loadAdminData(); // refresh instantly
 }
 
 /* ================= RESOLVE ================= */
@@ -215,14 +217,14 @@ async function resolveUser(id) {
 
     alert("✅ Tourist marked safe");
 
-    loadAdminData();
+    loadAdminData(); // instant refresh
 
   } catch (error) {
     console.error(error);
   }
 }
 
-/* ================= LANGUAGE CHANGE ================= */
+/* ================= LANGUAGE ================= */
 
 document.getElementById("languageSelect").addEventListener("change", function () {
   const lang = this.value;
