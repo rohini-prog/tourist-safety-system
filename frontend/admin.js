@@ -196,14 +196,24 @@ async function sendResponse(touristId, inputId) {
 /* ================= RESOLVE ================= */
 
 async function resolveUser(id) {
+async function resolveUser(id) {
   try {
 
-    await fetch(`${API}/resolve`, {   // ✅ FIXED URL
+    const responseText = document.getElementById(`msg_${id}`).value;
+
+    if (!responseText) {
+      alert("Please enter response");
+      return;
+    }
+
+    await fetch(`${API}/resolve`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("token") // ✅ VERY IMPORTANT
-      }
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        touristId: id
+      })
     });
 
     alert("✅ Tourist marked safe");
