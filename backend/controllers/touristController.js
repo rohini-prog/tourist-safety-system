@@ -312,8 +312,8 @@ exports.sendResponse = async (req, res) => {
 // ================= RESOLVE EMERGENCY =================
 exports.resolveEmergency = async (req, res) => {
   try {
-
-    const tourist = await Tourist.findById(req.user.id);
+    const { touristId}=req.body;
+    const tourist = await Tourist.findById(touristId);
 
     if (!tourist) {
       return res.status(404).json({ message: "Tourist not found" });
