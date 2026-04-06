@@ -313,7 +313,8 @@ exports.sendResponse = async (req, res) => {
 exports.resolveEmergency = async (req, res) => {
   try {
     const { touristId}=req.body;
-    const tourist = await Tourist.findById(touristId);
+    const tourist = await
+    Tourist.findById(touristId);
 
     if (!tourist) {
       return res.status(404).json({ message: "Tourist not found" });
@@ -333,6 +334,10 @@ exports.resolveEmergency = async (req, res) => {
       message: "Marked as Safe",
       riskStatus: tourist.riskStatus
     });
+  }catch(error){
+    res.status(500).json({error:error.message});
+  }
+};
 
   } catch (error) {
     res.status(500).json({ error: error.message });
