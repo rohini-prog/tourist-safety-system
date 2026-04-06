@@ -143,9 +143,21 @@ if (distance < 0.00005) {
     riskStatus = "Warning";
 }
 
-// 🚨 ANOMALY 2: Sudden jump
-if (distance > 0.05) {
-    riskStatus = "Danger";
+// Ignore unrealistic large jumps (manual testing / teleport)
+if (distance > 1) {
+    console.log("Ignoring large jump (manual test)");
+} else {
+
+    // 🚨 ANOMALY 2: Sudden jump
+    if (distance > 0.05) {
+        riskStatus = "Danger";
+    }
+
+    // 🚨 ANOMALY 3: High speed
+    if (speed > 0.01) {
+        riskStatus = "Danger";
+    }
+
 }
 
 // 🚨 ANOMALY 3: High speed
