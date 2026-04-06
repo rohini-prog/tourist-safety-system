@@ -108,5 +108,14 @@ router.put("/resolve", authMiddleware, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+const { touristChain } = require("../blockchain/blockchain");
 
+// ✅ ADD THIS ROUTE
+router.get("/blockchain", (req, res) => {
+  try {
+    res.json(touristChain.chain);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 module.exports = router;
