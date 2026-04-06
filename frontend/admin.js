@@ -198,32 +198,22 @@ async function sendResponse(touristId, inputId) {
 async function resolveUser(id) {
   try {
 
-    const responseText = document.getElementById(`msg_${id}`).value;
-
-    if (!responseText) {
-      alert("Please enter response");
-      return;
-    }
-
-    await fetch(`${API}/resolve/${id}`, {
+    await fetch(`${API}/resolve`, {   // ✅ FIXED URL
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        response: responseText
-      })
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token") // ✅ VERY IMPORTANT
+      }
     });
 
     alert("✅ Tourist marked safe");
 
-    loadAdminData(); // instant refresh
+    loadAdminData();
 
   } catch (error) {
     console.error(error);
   }
 }
-
 /* ================= LANGUAGE ================= */
 
 document.getElementById("languageSelect").addEventListener("change", function () {
