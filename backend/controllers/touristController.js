@@ -111,7 +111,20 @@ const tourist = await Tourist.findById(req.user.id);
 if (!tourist) {
 return res.status(404).json({ message: "Tourist not found" });
 }
-    
+  // 🚨 STEP 1 FIX: Prevent override during emergency
+if (tourist.isEmergency) {
+
+  // still update location (optional but recommended)
+  const { latitude, longitude } = req.body;
+  tourist.location = { latitude, longitude };
+  await tourist.save();
+
+  return res.json({
+    message: "Emergency active",
+    riskStatus: tourist.riskStatus,
+    safetyScore: tourist.safetyScore
+  });
+}  
 
 
 // -------- AI MOVEMENT ANALYSIS --------
