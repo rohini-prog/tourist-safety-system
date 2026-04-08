@@ -26,8 +26,7 @@ const translations = {
   }
 };
 
-const savedLang = localStorage.getItem("lang") || "en";
-changeLanguage(savedLang);
+
 
 function changeLanguage(lang) {
   document.getElementById("title").innerText = translations[lang].title;
@@ -194,7 +193,6 @@ async function sendResponse(touristId, inputId) {
 /* ================= RESOLVE ================= */
 
 async function resolveUser(id) {
-async function resolveUser(id) {
   try {
 
     const responseText = document.getElementById(`msg_${id}`).value;
@@ -224,11 +222,6 @@ async function resolveUser(id) {
 }
 /* ================= LANGUAGE ================= */
 
-document.getElementById("languageSelect").addEventListener("change", function () {
-  const lang = this.value;
-  localStorage.setItem("lang", lang);
-  changeLanguage(lang);
-});
 
 /* ================= AUTO REFRESH ================= */
 
@@ -238,6 +231,14 @@ setInterval(() => {
   }
 }, 5000);
   document.addEventListener("DOMContentLoaded", () => {
+    const savedLang = localStorage.getItem("lang") || "en";
+changeLanguage(savedLang);
+    document.getElementById("languageSelect").addEventListener("change", function () {
+  const lang = this.value;
+  localStorage.setItem("lang", lang);
+  changeLanguage(lang);
+});
+
   loadAdminMap();
   loadAdminData();
 });
