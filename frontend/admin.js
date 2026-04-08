@@ -75,7 +75,6 @@ function loadAdminMap() {
   }, 500);
 }
 
-loadAdminMap();
 
 /* ================= LOAD DATA ================= */
 
@@ -167,7 +166,6 @@ async function loadAdminData() {
   document.getElementById("sosCount").innerText = sos;
 }
 
-loadAdminData();
 
 /* ================= SEND RESPONSE ================= */
 
@@ -239,3 +237,7 @@ setInterval(() => {
     loadAdminData();
   }
 }, 5000);
+  document.addEventListener("DOMContentLoaded", () => {
+  loadAdminMap();
+  loadAdminData();
+});
