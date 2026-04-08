@@ -182,7 +182,7 @@ async function sendResponse(touristId, inputId) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ message })
+    body: JSON.stringify({touristId, message })
   });
 
   alert("Message sent ✅");
