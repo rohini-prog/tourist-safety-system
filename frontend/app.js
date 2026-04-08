@@ -98,6 +98,30 @@ async function login() {
   }
 }
 
+/* ================= ADMIN LOGIN ================= */
+
+function adminLogin() {
+
+  const email = document.getElementById("adminEmail").value;
+  const password = document.getElementById("adminPassword").value;
+
+  if (!email || !password) {
+    alert("Please enter admin email and password");
+    return;
+  }
+
+  // 🔐 Simple admin login (for demo)
+  if (email === "admin@gmail.com" && password === "admin123") {
+
+    alert("Admin login successful ✅");
+
+    // redirect to admin dashboard
+    window.location.href = "admin.html";
+
+  } else {
+    alert("Invalid admin credentials ❌");
+  }
+}
 /* ================= MULTILINGUAL ================= */
 
 const translations = {
