@@ -209,10 +209,10 @@ let safetyScore = 100;
 
 if (riskStatus === "Warning") safetyScore = 70;
 if (riskStatus === "Danger") safetyScore = 40;
-
+if(!tourist.isEmergency){
 tourist.safetyScore = safetyScore;
 tourist.riskStatus  = riskStatus;
-
+}
 
 // -------- SAVE LOCATION --------
 
