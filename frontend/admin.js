@@ -231,14 +231,24 @@ setInterval(() => {
   }
 }, 5000);
   document.addEventListener("DOMContentLoaded", () => {
-    const savedLang = localStorage.getItem("lang") || "en";
-changeLanguage(savedLang);
-    document.getElementById("languageSelect").addEventListener("change", function () {
-  const lang = this.value;
-  localStorage.setItem("lang", lang);
-  changeLanguage(lang);
-});
+
+  const savedLang = localStorage.getItem("lang") || "en";
+  changeLanguage(savedLang);
+
+  document.getElementById("languageSelect").addEventListener("change", function () {
+    const lang = this.value;
+    localStorage.setItem("lang", lang);
+    changeLanguage(lang);
+  });
 
   loadAdminMap();
   loadAdminData();
+
+  // auto refresh
+  setInterval(() => {
+    if (!isTyping) {
+      loadAdminData();
+    }
+  }, 5000);
+
 });
