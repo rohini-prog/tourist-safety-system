@@ -84,7 +84,7 @@ router.post("/send-response/:id", async (req, res) => {
 router.put("/resolve", authMiddleware, async (req, res) => {
   try {
 
-    const tourist = await Tourist.findById(req.params.id);
+    const tourist = await Tourist.findById(touristId);
 
     if (!tourist) {
       return res.status(404).json({ message: "Tourist not found" });
