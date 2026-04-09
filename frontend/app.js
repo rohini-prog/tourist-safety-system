@@ -306,23 +306,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (document.getElementById("map")) {
     loadMap();
+    updateLocation();
+    setInterval(updateLocation, 5000);
   }
-
+getTouristData();
 });
 
 async function markSafe() {
 
   const token = localStorage.getItem("token");
 
+  // ✅ Decode token to get tourist ID
+  const payload = JSON.parse(atob(token.split('.')[1]));
+  const touristId = payload.id;
+
   await fetch(API + "/resolve", {
     method: "PUT",
     headers: {
+      "Content-Type": "application/json",
       "Authorization": "Bearer " + token
-    }
+    },
+    body: JSON.stringify({ touristId }) // ✅ SEND ID
   });
 
   alert("✅ Issue marked as resolved");
 
-  // refresh UI
   getTouristData();
 }
