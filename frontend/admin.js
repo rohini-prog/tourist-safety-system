@@ -81,7 +81,7 @@ async function loadAdminData() {
 
   const res = await fetch(API + "/all");
   const tourists = await res.json();
-
+  console.log("Latest tourists data:",tourists);
   document.getElementById("totalTourists").innerText = tourists.length;
 
   let active = 0;
