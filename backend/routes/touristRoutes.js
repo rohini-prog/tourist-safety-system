@@ -83,7 +83,7 @@ router.post("/send-response/:id", async (req, res) => {
 // ================= TOURIST RESOLVE EMERGENCY =================
 router.put("/resolve", authMiddleware, async (req, res) => {
   try {
-
+    const {touristId }=req.body;
     const tourist = await Tourist.findById(touristId);
 
     if (!tourist) {
