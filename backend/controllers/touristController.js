@@ -209,7 +209,7 @@ let safetyScore = 100;
 
 if (riskStatus === "Warning") safetyScore = 70;
 if (riskStatus === "Danger") safetyScore = 40;
-if(!tourist.isEmergency){
+if(!tourist.isEmergency==faslse && tourist.riskStatus=="Safe"){
 tourist.safetyScore = safetyScore;
 tourist.riskStatus  = riskStatus;
 }
